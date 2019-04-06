@@ -25,24 +25,26 @@ const fadeOptions = {
 };
 
 const closeMenu = () => {
-  menu.classList.remove('app-visible');
   menu.classList.add('app-hidden');
 
   menuToggleIcon.innerHTML = 'menu';
 };
 
+const openMenu = () => {
+  menu.classList.remove('app-hidden');
+
+  menuToggleIcon.innerHTML = 'close';
+};
+
 menuToggleButton.onclick = () => {
   menuToggleIcon.animate(fadeKeyframes, fadeOptions);
 
-  const isMenuVisible = menu.classList.contains('app-visible');
+  const isMenuHidden = menu.classList.contains('app-hidden');
 
-  if (isMenuVisible) {
-    closeMenu();
+  if (isMenuHidden) {
+    openMenu();
   } else {
-    menu.classList.remove('app-hidden');
-    menu.classList.add('app-visible');
-
-    menuToggleIcon.innerHTML = 'close';
+    closeMenu();
   }
 };
 
@@ -51,3 +53,15 @@ menuItems.forEach((menuItem) => {
     closeMenu();
   };
 });
+
+let currentYOffset = 0;
+
+window.onscroll = () => {
+  const yOffset = window.pageYOffset;
+  if (yOffset > currentYOffset) {
+    menuToggleButton.classList.add('app-hidden');
+  } else {
+    menuToggleButton.classList.remove('app-hidden');
+  }
+  currentYOffset = yOffset <= 0 ? 0 : yOffset; // For Mobile or negative scrolling
+};
