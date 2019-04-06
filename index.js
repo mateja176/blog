@@ -17,10 +17,8 @@ const fadeKeyframes = [
   },
 ];
 
-const duration = 500;
-
 const fadeOptions = {
-  duration,
+  duration: 500,
   easing: 'ease-in-out',
 };
 
@@ -50,7 +48,7 @@ const toggleMenu = () => {
 
 menuToggleButton.onclick = toggleMenu;
 
-menuToggleButton.keyup = ({ key }) => {
+menuToggleButton.onkeyup = ({ key }) => {
   if (key === 'Enter') {
     toggleMenu();
   }
@@ -65,13 +63,15 @@ menuItems.forEach((menuItem) => {
 let currentYOffset = 0;
 
 window.onscroll = () => {
-  const yOffset = window.pageYOffset;
+  if (window.innerWidth < 1060) {
+    const yOffset = window.pageYOffset;
 
-  if (yOffset > currentYOffset) {
-    menuToggleButton.classList.add('app-hidden');
-  } else {
-    menuToggleButton.classList.remove('app-hidden');
+    if (yOffset > currentYOffset) {
+      menuToggleButton.classList.add('app-hidden');
+    } else {
+      menuToggleButton.classList.remove('app-hidden');
+    }
+
+    currentYOffset = yOffset;
   }
-
-  currentYOffset = yOffset <= 0 ? 0 : yOffset; // For Mobile or negative scrolling
 };
