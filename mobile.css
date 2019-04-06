@@ -27,6 +27,12 @@
   opacity: 0.7;
 }
 
+@media (min-width: 1060px) {
+  .menu__toggle {
+    display: none;
+  }
+}
+
 .app-hidden {
   opacity: 0;
 }
