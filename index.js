@@ -36,7 +36,7 @@ const openMenu = () => {
   menuToggleIcon.innerHTML = 'close';
 };
 
-menuToggleButton.onclick = () => {
+const toggleMenu = () => {
   menuToggleIcon.animate(fadeKeyframes, fadeOptions);
 
   const isMenuHidden = menu.classList.contains('app-hidden');
@@ -45,6 +45,14 @@ menuToggleButton.onclick = () => {
     openMenu();
   } else {
     closeMenu();
+  }
+};
+
+menuToggleButton.onclick = toggleMenu;
+
+menuToggleButton.keyup = ({ key }) => {
+  if (key === 'Enter') {
+    toggleMenu();
   }
 };
 
@@ -58,10 +66,12 @@ let currentYOffset = 0;
 
 window.onscroll = () => {
   const yOffset = window.pageYOffset;
+
   if (yOffset > currentYOffset) {
     menuToggleButton.classList.add('app-hidden');
   } else {
     menuToggleButton.classList.remove('app-hidden');
   }
+
   currentYOffset = yOffset <= 0 ? 0 : yOffset; // For Mobile or negative scrolling
 };
