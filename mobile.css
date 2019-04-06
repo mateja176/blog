@@ -12,6 +12,7 @@
 .menu__toggle {
   --width: 3em;
   --top: 1em;
+  cursor: pointer;
   background-color: royalblue;
   color: white;
   border-radius: 50%;
