@@ -5,6 +5,8 @@ const toc = document.querySelector(".stackedit__left");
 
 const tocItems = document.querySelectorAll(".stackedit__toc ul li ul li");
 
+const content = document.querySelector(".stackedit__right");
+
 const fadeKeyframes = [
   {
     color: "white",
@@ -26,12 +28,16 @@ const closeToc = () => {
   toc.classList.add("app-hidden");
 
   tocToggleIcon.innerHTML = "toc";
+
+  content.onclick = () => {};
 };
 
 const openToc = () => {
   toc.classList.remove("app-hidden");
 
   tocToggleIcon.innerHTML = "close";
+
+  content.onclick = toggleToc;
 };
 
 const toggleToc = () => {
