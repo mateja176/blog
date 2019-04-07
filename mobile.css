@@ -9,7 +9,7 @@
   margin-bottom: 1em;
 }
 
-.menu__toggle {
+.toc__toggle {
   --width: 3em;
   --top: 1em;
   cursor: pointer;
@@ -34,7 +34,7 @@
 }
 
 @media (min-width: 1060px) {
-  .menu__toggle {
+  .toc__toggle {
     opacity: 0;
   }
 

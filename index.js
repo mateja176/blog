@@ -1,62 +1,62 @@
-const menuToggleButton = document.querySelector('.menu__toggle');
-const menuToggleIcon = menuToggleButton.querySelector('i');
+const tocToggleButton = document.querySelector(".toc__toggle");
+const tocToggleIcon = tocToggleButton.querySelector("i");
 
-const menu = document.querySelector('.stackedit__left');
+const toc = document.querySelector(".stackedit__left");
 
-const menuItems = document.querySelectorAll('.stackedit__toc ul li ul li');
+const tocItems = document.querySelectorAll(".stackedit__toc ul li ul li");
 
 const fadeKeyframes = [
   {
-    color: 'white',
+    color: "white",
   },
   {
-    color: 'royalblue',
+    color: "royalblue",
   },
   {
-    color: 'white',
+    color: "white",
   },
 ];
 
 const fadeOptions = {
   duration: 500,
-  easing: 'ease-in-out',
+  easing: "ease-in-out",
 };
 
-const closeMenu = () => {
-  menu.classList.add('app-hidden');
+const closeToc = () => {
+  toc.classList.add("app-hidden");
 
-  menuToggleIcon.innerHTML = 'menu';
+  tocToggleIcon.innerHTML = "toc";
 };
 
-const openMenu = () => {
-  menu.classList.remove('app-hidden');
+const openToc = () => {
+  toc.classList.remove("app-hidden");
 
-  menuToggleIcon.innerHTML = 'close';
+  tocToggleIcon.innerHTML = "close";
 };
 
-const toggleMenu = () => {
-  menuToggleIcon.animate(fadeKeyframes, fadeOptions);
+const toggleToc = () => {
+  tocToggleIcon.animate(fadeKeyframes, fadeOptions);
 
-  const isMenuHidden = menu.classList.contains('app-hidden');
+  const isTocHidden = toc.classList.contains("app-hidden");
 
-  if (isMenuHidden) {
-    openMenu();
+  if (isTocHidden) {
+    openToc();
   } else {
-    closeMenu();
+    closeToc();
   }
 };
 
-menuToggleButton.onclick = toggleMenu;
+tocToggleButton.onclick = toggleToc;
 
-menuToggleButton.onkeyup = ({ key }) => {
-  if (key === 'Enter') {
-    toggleMenu();
+tocToggleButton.onkeyup = ({ key }) => {
+  if (key === "Enter") {
+    toggleToc();
   }
 };
 
-menuItems.forEach((menuItem) => {
-  menuItem.onclick = () => {
-    closeMenu();
+tocItems.forEach(tocItem => {
+  tocItem.onclick = () => {
+    closeToc();
   };
 });
 
@@ -67,9 +67,9 @@ window.onscroll = () => {
     const yOffset = window.pageYOffset;
 
     if (yOffset > currentYOffset) {
-      menuToggleButton.classList.add('app-hidden');
+      tocToggleButton.classList.add("app-hidden");
     } else {
-      menuToggleButton.classList.remove('app-hidden');
+      tocToggleButton.classList.remove("app-hidden");
     }
 
     currentYOffset = yOffset;
