@@ -12,7 +12,7 @@ const fadeKeyframes = [
     color: "white",
   },
   {
-    color: "royalblue",
+    color: "#aaa",
   },
   {
     color: "white",
