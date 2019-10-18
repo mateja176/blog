@@ -1,41 +1,41 @@
-const tocToggleButton = document.querySelector(".toc__toggle");
-const tocToggleIcon = tocToggleButton.querySelector("i");
+const tocToggleButton = document.querySelector('.toc__toggle');
+const tocToggleIcon = tocToggleButton.querySelector('i');
 
-const toc = document.querySelector(".stackedit__left");
+const toc = document.querySelector('.stackedit__left');
 
-const tocItems = document.querySelectorAll(".stackedit__toc ul li ul li");
+const tocItems = document.querySelectorAll('.stackedit__toc ul li ul li');
 
-const content = document.querySelector(".stackedit__right");
+const content = document.querySelector('.stackedit__right');
 
 const fadeKeyframes = [
   {
-    color: "white",
+    color: 'white',
   },
   {
-    color: "#aaa",
+    color: '#aaa',
   },
   {
-    color: "white",
+    color: 'white',
   },
 ];
 
 const fadeOptions = {
   duration: 500,
-  easing: "ease-in-out",
+  easing: 'ease-in-out',
 };
 
 const closeToc = () => {
-  toc.classList.add("app-hidden");
+  toc.classList.add('app-hidden');
 
-  tocToggleIcon.innerHTML = "toc";
+  tocToggleIcon.innerHTML = 'toc';
 
   content.onclick = () => {};
 };
 
 const openToc = () => {
-  toc.classList.remove("app-hidden");
+  toc.classList.remove('app-hidden');
 
-  tocToggleIcon.innerHTML = "close";
+  tocToggleIcon.innerHTML = 'close';
 
   content.onclick = toggleToc;
 };
@@ -43,7 +43,7 @@ const openToc = () => {
 const toggleToc = () => {
   tocToggleIcon.animate(fadeKeyframes, fadeOptions);
 
-  const isTocHidden = toc.classList.contains("app-hidden");
+  const isTocHidden = toc.classList.contains('app-hidden');
 
   if (isTocHidden) {
     openToc();
@@ -55,7 +55,7 @@ const toggleToc = () => {
 tocToggleButton.onclick = toggleToc;
 
 tocToggleButton.onkeyup = ({ key }) => {
-  if (key === "Enter") {
+  if (key === 'Enter') {
     toggleToc();
   }
 };
@@ -73,9 +73,9 @@ window.onscroll = () => {
     const yOffset = window.pageYOffset;
 
     if (yOffset > currentYOffset) {
-      tocToggleButton.classList.add("app-hidden");
+      tocToggleButton.classList.add('app-hidden');
     } else {
-      tocToggleButton.classList.remove("app-hidden");
+      tocToggleButton.classList.remove('app-hidden');
     }
 
     currentYOffset = yOffset;
