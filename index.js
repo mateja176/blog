@@ -21,7 +21,7 @@ const fadeKeyframes = [
 
 const fadeOptions = {
   duration: 500,
-  easing: 'ease-in-out',
+  easing: 'ease-out',
 };
 
 const closeToc = () => {
