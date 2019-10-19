@@ -1,34 +1,31 @@
 const treeWalker = document.createTreeWalker(document.body);
 
 let node = treeWalker.nextNode();
-const nodesToReplace = [];
+const links = {};
 
 while (node) {
   if (/^\s*\[[\w -]+\]/.test(node.textContent) && node.nodeType === 3) {
-    console.dir(node);
     const [rawText, href] = node.textContent.split(': ');
     const formattedText = rawText
       .trim()
       .slice(1)
       .slice(0, -1);
-    const a = document.createElement('a');
-    a.textContent = formattedText;
-    a.href = href.startsWith('#') ? href.replace(' ', '-') : href;
-    a.target = '__blank';
-    nodesToReplace.push([a, node]);
+    if (node.nextSibling && node.nextSibling.tagName === 'A') {
+      node.nextSibling.textContent = formattedText;
+      node.nextSibling.target = '__blank';
+      links[formattedText] = node.nextSibling;
+    } else {
+      const a = document.createElement('a');
+      a.textContent = formattedText;
+      a.href = href;
+      a.target = '__blank';
+      links[formattedText] = a;
+    }
   }
   node = treeWalker.nextNode();
 }
 
-nodesToReplace.forEach(([a, n]) => {
-  if (n.nextSibling.tagName === 'A') {
-    n.nextSibling.textContent = a.textContent;
-    n.nextSibling.target = '__blank';
-    n.parentNode.removeChild(n);
-    return;
-  }
-  n.parentNode.replaceChild(a, n);
-});
+console.log(links);
 
 const tocToggleButton = document.querySelector('.toc__toggle');
 const tocToggleIcon = tocToggleButton.querySelector('i');
