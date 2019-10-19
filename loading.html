@@ -50,9 +50,9 @@
     <div class="stackedit__html">
       <h1 id="great-ux-with-these-loading-techniques">Great UX With These Loading Techniques</h1>
 <p>We will be discussing 3 types of loading a user may encounter while interacting with your application.</p>
-<p><em>This discussion is mostly oriented towards [single page apps] but is relevant for any web app</em></p>
+<p><em>This discussion is mostly oriented towards <a href="https://wikipedia.org/wiki/single-page_application">single page apps</a> but is relevant for any web app</em></p>
 <h2 id="backend-operations">Backend Operations</h2>
-<p>This is the most straightforward way of handling a loading state and along with [loading content] the most common one.</p>
+<p>This is the most straightforward way of handling a loading state and along with <a href="#loading-content">loading content</a> the most common one.</p>
 <p>Let’s say that in front of you is a login form and you’ve just typed in your credentials. Now you may want to submit your credentials to authenticate yourself and access your private content. After clicking the submit button a few things can happen.</p>
 <ol>
 <li>The server request performs flawlessly and you get a desired response</li>
@@ -98,14 +98,10 @@
 </code></pre>
 <p>If you’re looking to get started with your own react application a recommended batteries included seed project is <a href="https://github.com/mateja176/react-hot-starter">react hot starter</a></p>
 <h2 id="lazy-loading-pages">Lazy Loading Pages</h2>
-<p>The third type is least common of the 3, but important nevertheless. At a certain point, when one of your pages grows significantly, or when a certain page is using a large third party dependency, you might want to lazy load that page to decrease time to [first meaningful paint] and [time to interactive].</p>
+<p>The third type is least common of the 3, but important nevertheless. At a certain point, when one of your pages grows significantly, or when a certain page is using a large third party dependency, you might want to lazy load that page to decrease time to <a href="https://developers.google.com/web/tools/lighthouse/audits/first-meaningful-paint">first meaningful paint</a> and <a href="https://developers.google.com/web/tools/lighthouse/audits/time-to-interactive">time to interactive</a>.</p>
 <p>Since the <strong>page loading skeleton</strong> will be included in your base bundle and the page itself will be loaded lazily - the page loading skeleton will be a completely separate entity.</p>
 <p>Usually you would create a handcrafted version of a page but will all major content containers replaced with <strong>shimmering boxes</strong>. This would require you to meticulously replicate the layout of the original page and any change that you make to the original page shall require adjustments of the <strong>page loading skeleton</strong>. This is a painstaking process, but the good news is - there is an easier way.</p>
 <p>You can separate the flash from the bone by extracting layout components into a <strong>page skeleton</strong> component which does not care too much about the gems you insert into its slots since it only knows how to position those elements. The you would use the <strong>page skeleton</strong> as the basis for creating the page component itself as well as the <strong>page loading skeleton</strong> keeping the layout in sync between the two.</p>
-<p>[loading content]: #loading content<br>
-[single page apps]: <a href="https://wikipedia.org/wiki/single-page_application">https://wikipedia.org/wiki/single-page_application</a><br>
-[first meaningful paint]: <a href="https://developers.google.com/web/tools/lighthouse/audits/first-meaningful-paint">https://developers.google.com/web/tools/lighthouse/audits/first-meaningful-paint</a><br>
-[time to interactive]: <a href="https://developers.google.com/web/tools/lighthouse/audits/time-to-interactive">https://developers.google.com/web/tools/lighthouse/audits/time-to-interactive</a></p>
 
     </div>
   </div>
