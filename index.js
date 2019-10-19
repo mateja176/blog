@@ -1,32 +1,3 @@
-const treeWalker = document.createTreeWalker(document.body);
-
-let node = treeWalker.nextNode();
-const links = {};
-
-while (node) {
-  if (/^\s*\[[\w -]+\]/.test(node.textContent) && node.nodeType === 3) {
-    const [rawText, href] = node.textContent.split(': ');
-    const formattedText = rawText
-      .trim()
-      .slice(1)
-      .slice(0, -1);
-    if (node.nextSibling && node.nextSibling.tagName === 'A') {
-      node.nextSibling.textContent = formattedText;
-      node.nextSibling.target = '__blank';
-      links[formattedText] = node.nextSibling;
-    } else {
-      const a = document.createElement('a');
-      a.textContent = formattedText;
-      a.href = href;
-      a.target = '__blank';
-      links[formattedText] = a;
-    }
-  }
-  node = treeWalker.nextNode();
-}
-
-console.log(links);
-
 const tocToggleButton = document.querySelector('.toc__toggle');
 const tocToggleIcon = tocToggleButton.querySelector('i');
 
