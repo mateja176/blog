@@ -1,3 +1,35 @@
+const treeWalker = document.createTreeWalker(document.body);
+
+let node = treeWalker.nextNode();
+const nodesToReplace = [];
+
+while (node) {
+  if (/^\s*\[[\w -]+\]/.test(node.textContent) && node.nodeType === 3) {
+    console.dir(node);
+    const [rawText, href] = node.textContent.split(': ');
+    const formattedText = rawText
+      .trim()
+      .slice(1)
+      .slice(0, -1);
+    const a = document.createElement('a');
+    a.textContent = formattedText;
+    a.href = href.startsWith('#') ? href.replace(' ', '-') : href;
+    a.target = '__blank';
+    nodesToReplace.push([a, node]);
+  }
+  node = treeWalker.nextNode();
+}
+
+nodesToReplace.forEach(([a, n]) => {
+  if (n.nextSibling.tagName === 'A') {
+    n.nextSibling.textContent = a.textContent;
+    n.nextSibling.target = '__blank';
+    n.parentNode.removeChild(n);
+    return;
+  }
+  n.parentNode.replaceChild(a, n);
+});
+
 const tocToggleButton = document.querySelector('.toc__toggle');
 const tocToggleIcon = tocToggleButton.querySelector('i');
 
