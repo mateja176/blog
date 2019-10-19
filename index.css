@@ -1,3 +1,7 @@
+.stackedit__right {
+  position: static;
+}
+
 .stackedit__left {
   z-index: 2;
   background-color: #eee;
