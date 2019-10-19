@@ -31,14 +31,17 @@
 
 .app-hidden {
   opacity: 0;
+  visibility: hidden;
 }
 
 @media (min-width: 1060px) {
   .toc__toggle {
     opacity: 0;
+    visibility: hidden;
   }
 
   .app-hidden {
     opacity: 1;
+    visibility: visible;
   }
 }
