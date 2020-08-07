@@ -45,7 +45,7 @@ main {
 
 .toc__toggle {
   --width: 3em;
-  --bottom: 1em;
+  --bottom: 3em;
   cursor: pointer;
   background-color: #aaa;
   color: white;
@@ -54,7 +54,7 @@ main {
   height: var(--width);
   position: fixed;
   bottom: var(--bottom);
-  right: var(--bottom);
+  right: 2em;
   z-index: 3;
   display: grid;
   align-items: center;
