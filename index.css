@@ -1,21 +1,52 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+section {
+  height: 100%;
+  display: flex;
+}
+
+main {
+  flex-grow: 1;
+  height: 100%;
+  overflow-y: auto;
+}
+
 .stackedit__right {
   position: static;
 }
 
 .stackedit__left {
   z-index: 2;
-  background-color: #eee;
   display: block;
   transition: all 0.5s ease-in-out;
+  position: relative;
 }
 
-.stackedit__toc ul li ul li {
-  margin-bottom: 1em;
+.stackedit__toc {
+  padding: 20px 0px;
+  background: #eee;
+  height: 100%;
+}
+
+.stackedit__toc ul,
+.stackedit__toc ul li a {
+  margin: 0;
+}
+
+.stackedit__toc ul li a {
+  padding: 10px 20px;
 }
 
 .toc__toggle {
   --width: 3em;
-  --top: 1em;
+  --bottom: 1em;
   cursor: pointer;
   background-color: #aaa;
   color: white;
@@ -23,8 +54,8 @@
   width: var(--width);
   height: var(--width);
   position: fixed;
-  top: var(--top);
-  right: var(--top);
+  bottom: var(--bottom);
+  right: var(--bottom);
   z-index: 3;
   display: grid;
   align-items: center;
@@ -36,6 +67,12 @@
 .app-hidden {
   opacity: 0;
   visibility: hidden;
+  width: 0px;
+  overflow-x: hidden;
+}
+
+.disqus__wrapper {
+  margin: 20px;
 }
 
 @media (min-width: 1060px) {
@@ -47,5 +84,6 @@
   .app-hidden {
     opacity: 1;
     visibility: visible;
+    width: 250px;
   }
 }
