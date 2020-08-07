@@ -26,7 +26,6 @@ main {
   z-index: 2;
   display: block;
   transition: all 0.5s ease-in-out;
-  position: relative;
 }
 
 .stackedit__toc {
@@ -65,10 +64,10 @@ main {
 }
 
 .app-hidden {
-  opacity: 0;
   visibility: hidden;
-  width: 0px;
+  transform: translateX(-250px);
   overflow-x: hidden;
+  position: absolute;
 }
 
 .disqus__wrapper {
@@ -82,8 +81,8 @@ main {
   }
 
   .app-hidden {
-    opacity: 1;
     visibility: visible;
-    width: 250px;
+    transform: translateX(0px);
+    position: relative;
   }
 }
