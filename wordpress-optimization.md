@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wordpress optimization</title>
+  <base href="./wordpress optimization.html">
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+  <link rel="stylesheet" href="./index.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+
+  <meta property="og:url" content="https://mytee306.github.io/blog/wordpress optimization.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Wordpress optimization" />
+  <meta property="og:description"
+    content="Read full article at https://mytee306.github.com/blog/wordpress optimization.html" />
+  <meta property="og:image" content="https://imgur.com/G3CgjIK.png" />
+  <meta property="og:image:width" content="125" />
+  <meta property="og:image:height" content="125" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="https://mytee306.github.io/blog/wordpress optimization.html" />
+  <meta name="twitter:title" content="Wordpress optimization" />
+  <meta name="twitter:description"
+    content="Read full article at https://mytee306.github.com/blog/wordpress optimization.html" />
+  <meta name="twitter:image" content="https://imgur.com/G3CgjIK.png" />
+</head>
+
+  <body class="stackedit">
+    <section>
+      <div class="toc__toggle" tabindex="0">
+        <i class="material-icons">toc</i>
+      </div>
+
+      <div class="stackedit__left app-hidden">
+        <div class="stackedit__toc">
+          
+<ul>
+<li><a href="#wordpress-optimization">WordPress Optimization</a></li>
+</ul>
+
+        </div>
+      </div>
+
+      <main>
+        <div class="stackedit__right">
+          <div class="stackedit__html">
+            <h1 id="wordpress-optimization">WordPress Optimization</h1>
+<ul>
+<li>
+<p>Image</p>
+<ul>
+<li>Resolution Optimization
+<ul>
+<li><a href="https://imagecompressor.com/">Optimizilla</a></li>
+<li><a href="http://www.imageoptimizer.net/Pages/Home.aspx">Image Optimizer</a></li>
+</ul>
+</li>
+<li>CLI
+<ul>
+<li><a href="https://www.npmjs.com/package/sharp">sharp</a></li>
+<li><a href="https://www.npmjs.com/package/imagemin-cli">imagemin</a></li>
+</ul>
+</li>
+<li><a href="https://technumero.com/lazy-load-images-in-wordpress/">Lazy Loading Offscreen Images</a></li>
+</ul>
+</li>
+<li>
+<p>CSS and JS</p>
+<ul>
+<li>Bundle, Uglify and Minify
+<ul>
+<li><a href="https://wordpress.org/plugins/autoptimize/">Autoptimize</a></li>
+</ul>
+</li>
+<li><a href="(https://www.dwuser.com/education/content/10-steps-to-a-faster-wordpress/)">GZIP</a></li>
+<li>Lazy load non critical JS using <code>async</code> and <code>defer</code> attributes
+<ul>
+<li><a href="https://technumero.com/defer-parsing-of-javascript/">Defer Parsing of Javascript</a></li>
+</ul>
+</li>
+<li><a href="https://technumero.com/how-to-leverage-browser-caching-wordpress/">Leverage Caching</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://www.wpdownloadmanager.com/doc/add-new-package/lock-options/">Plugin Version Lock</a></p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/17897044/wordpress-how-to-disable-plugin-update">Stackoverflow Question and Answer</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://wpscans.com/scan/?id=9bd60ef5688fec08ef311cfd7ca2b6d1">WordPress Plugin Scanner</a></p>
+</li>
+<li>
+<p><a href="https://wordpress.org/hosting/">WordPress Hosting Options</a></p>
+</li>
+<li>
+<p><a href="https://www.xml-sitemaps.com/">Sitemap Generator</a></p>
+</li>
+</ul>
+
+          </div>
+        </div>
+
+        <div style="margin: 20px;">
+          <div id="disqus_thread"></div>
+        </div>
+      </main>
+    </section>
+
+    <script src="./index.js"></script>
+
+    <script>
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+      /*
+      var disqus_config = function () {
+      this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      */
+      (function () { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://mateja176-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+        Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//mateja176-blog.disqus.com/count.js" async></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137872597-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-137872597-1');
+    </script>
+  </body>
+
+</html>
+
