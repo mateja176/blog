@@ -1,3 +1,13 @@
+:root {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+img,
+picture,
+video {
+  filter: invert(1) hue-rotate(180deg);
+}
+
 * {
   box-sizing: border-box;
 }
