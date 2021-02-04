@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React code quality guidelines</title>
+  <base href="./react code quality guidelines.html">
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+  <link rel="stylesheet" href="./index.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+
+  <meta property="og:url" content="https://mateja176.github.io/blog/react code quality guidelines.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="React code quality guidelines" />
+  <meta property="og:description"
+    content="Read full article at https://mateja176.github.com/blog/react code quality guidelines.html" />
+  <meta property="og:image" content="https://i.imgur.com/suavzA9.png" />
+  <meta property="og:image:width" content="125" />
+  <meta property="og:image:height" content="125" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="https://mateja176.github.io/blog/react code quality guidelines.html" />
+  <meta name="twitter:title" content="React code quality guidelines" />
+  <meta name="twitter:description"
+    content="Read full article at https://mateja176.github.com/blog/react code quality guidelines.html" />
+  <meta name="twitter:image" content="https://i.imgur.com/suavzA9.png" />
+</head>
+
+  <body class="stackedit">
+    <section>
+      <div class="toc__toggle" tabindex="0">
+        <i class="material-icons">toc</i>
+      </div>
+
+      <div class="stackedit__left app-hidden">
+        <div class="stackedit__toc">
+          
+<ul>
+<li>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#make-impossible-states-impossible">Make Impossible States Impossible</a></li>
+<li><a href="#isolate-side-effects">Isolate Side Effects</a></li>
+<li><a href="#immutability">Immutability</a></li>
+<li><a href="#composition">Composition</a></li>
+<li><a href="#function-composition">Function Composition</a></li>
+<li><a href="#clean-components">Clean Components</a></li>
+<li><a href="#hooks">Hooks</a></li>
+<li><a href="#styled-components">Styled Components</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+
+      <main>
+        <div class="stackedit__right">
+          <div class="stackedit__html">
+            <h2 id="introduction">Introduction</h2>
+<p>The following principles are heavily inspired by <a href="https://www.youtube.com/watch?v=5fG_lyNuEAw">React To The Future</a> by Jordan Walke and <a href="https://www.youtube.com/watch?v=IcgmSRJHu_8">Make Impossible States Impossible</a> by Richard Feldman.</p>
+<h2 id="make-impossible-states-impossible">Make Impossible States Impossible</h2>
+<p>Simply said, you can think of this as minimizing state or avoiding the duplication of state.</p>
+<p>This applies to local state, global state, context state, Local Storage state, Session Storage, IndexedDB state and any other storage which is not costly to access¹. If a piece of state is global, it should not be part of the local state at the same time. Failing to adhere to this principle opens up the opportunity for a whole class of bugs to creep in. Moreover, syncing duplicated state is tedious and error prone.</p>
+<p>It is only recommended to do so when there is great performance impact. For example when a filtration request is performed based on the user’s input. A common approach is to have a local search value state and updates immediately followed a user’s input. Whereas, using debouncing or throttling the global state may be changed asynchronously - greatly reducing the number of network requests.</p>
+<p>In those situations, keep the duplication to a bare minimum. Adhere to the <a href="https://github.com/reduxjs/reselect#reselect">principle of redux selectors</a>. Computation is cheap for the most part. Hence the rule of thumb is: Do not duplicate state if you can compute it.</p>
+<p>¹ does not require an excessive amount of time, or resources to access and is not error prone</p>
+<h2 id="isolate-side-effects">Isolate Side Effects</h2>
+<p>Side effects are an essential part of real life applications. An application without side effects is isolated from the rest of the world and practically useless. In a nutshell, side effects enable applications to exchange data with other applications and systems. Reading data in one direction and sending messages in the other. The data which is read is then processed (combined, summed truncated, grouped etc.) and displayed (in an input, in a calendar, as part of a chart, list, tree, vector graphic etc.). The outgoing messages are usually based on the transformed data, user input data or a combination between the two.</p>
+<p>However, with great power comes great responsibility. It is an imperative to be responsible with how you handle side effects.</p>
+<h3 id="physical-isolation">Physical isolation</h3>
+<p>Having centralized side effects enables us to locate them quickly and easily. This greatly helps us avoid unexpected behavior and lengthy debugging sessions.</p>
+<p>Additionally, when you can locate something you can act upon it.</p>
+<h3 id="logical-isolation">Logical isolation</h3>
+<p>Following the principles of the <a href="https://dev.to/barrymcauley/onion-architecture-3fgl">onion architecture</a>, aptly named after the layers which comprise an application, side effects should be located as far away from the center as possible. Taking the analogy further, business logic should reside in the heart of your application. Business logic is what gives an identity to your application, other infrastructure and plugins are just that - important but replaceable components.</p>
+<p>Moreover, you can think of side effects (usually initiated in services) as plugins to your application. Interfaces are what enables this structure. An interface defines the contract of a service, basically the the input and output.</p>
+<p>This architecture and coding responsibly enables us to easily mock services for testing purposes and replace them should the need to do so ever arise (a common use case is to create a wrapper around an existing service to enhance it in a certain way).</p>
+<p>Keep Side Effects In Their Own Layer.</p>
+<h2 id="immutability">Immutability</h2>
+<p>Writing immutable code does take some time to get used to if your experience is based in Imperative and or Object Oriented languages. However, after some time, it becomes second nature. Once I got used to writing code in an immutable fashion, I never looked back.</p>
+<h3 id="exceptions-to-immutability">Exceptions To Immutability</h3>
+<p>If you try to write immutable code only, it will bring you a long way. However in the wild, you will inevitably encounter a situation where you are forced to break your oath of immutability. It may take some time, but you will notice a common thread. The common theme is <strong>time</strong>. Any “constant” which changes over time (in the sense that its value changes while preserving referential integrity) is state. State is mutable because it changes over time. For example try implementing a debounce function (similar to the one offered by lodash) without mutating. you will soon find out that it’s impossible.</p>
+<p>In reality, writing asynchronous code is not as common as one may think. Hence, approximately 80% of time, a given code snippet which contains one or more mutations can be rewritten in an immutable fashion.</p>
+<p>By doing so the snippet becomes more readable and easier to understand. Roughly 80% of the time, software developers are reading code instead of writing code. Meaning that code which is easy to read and understand boosts productivity sometimes by an order of magnitude. It may sound trivial but if a constant is declared to have a given value, that same constant will remain the same throughout the length of the program, regardless of whether it’s been reference on line 9 or line 999.</p>
+<h3 id="immutable-algorithms">Immutable Algorithms</h3>
+<p>If you’re wondering, any algorithm which doesn’t involve time as a physical phenomenon can be written without a single mutation. Writing an algorithm like <a href="https://en.wikipedia.org/wiki/Breadth-first_search">BFS</a> is perfectly fine, although it is not very usual since it does increase the space complexity of your implementation. The increase in space complexity can be a concern in certain situations.</p>
+<h4 id="recursive-algorithms">Recursive Algorithms</h4>
+<p>There is a class of algorithms which apparently cannot be implemented without mutations. Once again, if the algorithm is not aware of the physical passage of time, it can be implemented without a single mutation. The counterpart to mutable variables in the immutable world are recursive functions. This is most obvious in implementations involving <a href="https://en.wikipedia.org/wiki/Tail_call">tail recursion</a>. This is technically not mutation, since each time a function is ran, the its parameters are declared anew, however referential integrity is preserved in the sense that the same parameter (based on position and/or name) has a different value depending on the ordinal of the invocation in a recursive call.</p>
+<h3 id="future-proof">Future Proof</h3>
+<p>Luckily, memory nowadays is dirt-cheap, whereas the slowing of <a href="https://en.wikipedia.org/wiki/Moore%27s_law">Moore’s Law</a> led trend of increasing the number</p>
+<p>processors rather than the clock speed of an individual core. In turn, this led to an increased need for parallelization. Ultimately, this is where immutable</p>
+<p>programming shines since it eliminates classes of problems related to <a href="https://en.wikipedia.org/wiki/Race_condition">race conditions</a>.</p>
+<h2 id="composition">Composition</h2>
+<p>Considering the <a href="https://reactjs.org/docs/thinking-in-react.html">Thinking in React</a> page, the ethos of React revolves around components. Our UI’s represent a hierarchy of components. Ultimately, when initializing your React application you would usually invoke the <code>render</code> function from <code>react-dom</code>, passing a React element as the first argument. The element is most often an instance of the main, <code>App</code> component. The <code>App</code> component is in turn composed of smaller components which have different responsibilities are and more specialized. This metaphor helps us understand the concept of composition. Arbitrarily complex structures may be created from simpler building blocks. This ties into the section on <a href="#isolate-side-effects">isolating side effects</a>, for being responsible in that regard</p>
+<p>makes composing things trivial.</p>
+<h2 id="function-composition">Function Composition</h2>
+<p>Here <a href="https://medium.com/ackee/typescript-function-composition-and-recurrent-types-a9efbc8e7736">an introduction</a> to function composition in TypeScript.</p>
+<h3 id="decomposition">Decomposition</h3>
+<p>Even Elon Musk stated that problem solving involves decomposing a difficult task into simpler constituents. This process can be repeated multiple times until the individual tasks become straightforward. This process paves the way for building reliable and maintainable software. Moreover, breaking up a task into smaller ones likely enables parallelization. Which is especially good news when you’re working in a team.</p>
+<h2 id="clean-components">Clean Components</h2>
+<h3 id="do-name-your-components-explicitly">Do Name Your Components Explicitly</h3>
+<p>Consider the example of component <code>Foo.jsx</code>:</p>
+<pre class=" language-jsx"><code class="prism  language-jsx">
+<span class="token keyword">export</span>  <span class="token keyword">default</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+
+<span class="token comment">/* ... */</span>
+
+<span class="token punctuation">}</span>
+
+</code></pre>
+<p>Has an important shortcoming when debugging the component via React DevTools and that is the fact that the component cannot be Searched by Name. To be exact searching for <code>Foo</code> is not going to focus you to the component instance based on <code>Foo.jsx</code>.</p>
+<p>Whereas the following approach solves the above mentioned issue:</p>
+<pre class=" language-jsx"><code class="prism  language-jsx">
+<span class="token keyword">const</span>  <span class="token function-variable function">Foo</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+
+<span class="token comment">/* ... */</span>
+
+<span class="token punctuation">}</span>
+
+  
+
+<span class="token keyword">export</span>  <span class="token keyword">default</span>  Foo<span class="token punctuation">;</span>
+
+</code></pre>
+<h3 id="create-constants">Create constants</h3>
+<p>Lots of people have a love hate relationship with JSX. Perhaps the primary reason why people dislike JSX is that they have had to maintain components which are over a 1000 lines of code. Especially tricky are the components whose JSX is cluttered with function declarations, inline object etc. These issues are alarming, however simply ditching JSX is probably not going to solve the underlying problem.</p>
+<p>The problem has to do with clean component architecture. Extracting constants inline function and object declarations into constants aid the readability, reusability and maintainability. This is often trivial to do:</p>
+<pre class=" language-tsx"><code class="prism  language-tsx">
+const  Foo: React.FC = () =&gt; {
+
+return  &lt;div  style={{ width:  200, background:  '#eee' }}&gt;Bar&lt;/div&gt;
+
+}
+
+</code></pre>
+<p>Would turn into:</p>
+<pre class=" language-tsx"><code class="prism  language-tsx">
+const  fooStyle: React.CSSProperties = { width:  200, background:  '#eee' };
+
+  
+
+const  Foo = () =&gt; {
+
+return  &lt;div  style={fooStyle}&gt;Bar&lt;/div&gt;
+
+}
+
+</code></pre>
+<p>Nevertheless, this becomes less trivial when dependencies to props and hooks are involved. In the end, it is worth it.</p>
+<h3 id="component-helpers">Component Helpers</h3>
+<p>The following point is closely tied to the previous. Namely, I mentioned potentially problematic components spanning over a 1000 lines of code.</p>
+<p>In the era of class components, co-locating helper functions aka instance methods and other information through instance properties was a common thing to do. If done right this ensures readability and maintainability. But not reusability, unless the methods are copied over from the class prototype. Nevertheless, if the method is being used elsewhere it is better off somewhere where it is accessible to other dependents too. A parallel may be drawn to the principle of <a href="https://reactjs.org/docs/lifting-state-up.html">Lifting State Up</a>.</p>
+<p>Furthermore, in the new era of functional components and hooks, everything declared inside a functional component is completely private. So even if well organized, logic is strictly tied to the given component. Even organization becomes a blatant problem when there is too many instances of hooks, data processing, etc.</p>
+<p>There is a simple workaround which is very flexible by nature. As mentioned constants can be extracted inside the same component, be it types, functions, objects, elements or other components. Having such a declaration be part of the original component file is not sacrilegious, however easily and quickly becomes difficult to manage. Hence, it is a best practice to extract types and constants into a top level config file (under the config folder), in case those types and constants are being used globally. If, however, they are local to a component of feature, a local config file may be created to house them. When it comes to extracting functions¹, a there exist a concept equivalent to the concept of a config file and/or folder named <code>helpers</code>.</p>
+<p>¹ it is best to keep functions clean as well</p>
+<h3 id="dependency-hierarchy">Dependency hierarchy</h3>
+<p>In the section above we scratched the surface with <code>config</code> files and folders as well as <code>helpers</code>. Next, we are going to expand this into a full-fledged hierarchy. The key value is purity, flexibility and reusability. Hence the hierarchy emerges based on dependencies on React, the global object¹. What follows is the complete hierarchy graph:</p>
+<p><img src="https://i.imgur.com/pEKbGBI.png" alt="Hierarchy"></p>
+<p>As it was foreshadowed before, it is important to note that this hierarchy may be recursive.</p>
+<p>¹ <code>globalThis</code> which is represented by the window in the context of the browser</p>
+<h3 id="consistency">Consistency</h3>
+<p>The above outlined naming convention is project based. The names themselves are not important, but consistency is.</p>
+<h2 id="hooks">Hooks</h2>
+<h3 id="do-prefix-custom-hooks-with-use">Do Prefix Custom Hooks With “use”</h3>
+<p>In the <a href="https://reactjs.org/docs/hooks-overview.html#building-your-own-hooks">Building Your Own Hooks</a> section of the official React docs, there is a paragraph stating the following:</p>
+<blockquote>
+<p>Custom Hooks are more of a convention than a feature. If a function’s name starts with ”use” and it calls other Hooks, we say it is a custom Hook. The useSomething naming convention is how our linter plugin is able to find bugs in the code using Hooks.</p>
+</blockquote>
+<p>This is in turn important because of the <a href="https://reactjs.org/docs/hooks-rules.html">Rules Of Hooks</a>.</p>
+<h3 id="do-wrap-inline-objects-in-usememo-and-inline-functions-in-usecallback">Do Wrap Inline Objects In useMemo And Inline Functions In useCallback</h3>
+<p>The <a href="https://reactjs.org/docs/hooks-reference.html#usememo">useMemo</a> hook is primarily a performance optimization.</p>
+<p>However if you follow the <a href="https://reactjs.org/docs/hooks-rules.html">Rules Of Hooks</a>. An important point is to declare all of the dependencies (apart from static ones) in the dependencies array.</p>
+<p>In the case of <code>useEffect</code> not managing dependencies well leads to obvious consequences like <code>Too many renders</code> errors etc. Leaving out a dependency though may lead to an effect running fewer times that it should (a notable exception is when we want an effect to run solely upon component mount). Luckily for us, developers, the React team the <a href="https://www.npmjs.com/package/eslint-plugin-react-hooks">eslint-plugin-react-hooks</a> which means that we don’t have to think about dependency management all the time.</p>
+<p>The point, however, is that if a custom hook has an instance of <code>useEffect</code>. And if the hook has a prop of type object as a dependency. An issue can emerge depending on how to object prop is passed to the instance of the custom hook. Namely, if the object is passed inline, a new object is created on each parent component render and the referential integrity, which dependency checking relies on, is broken. Meaning that the code in the <code>useEffect</code> callback is going to be executed as if the hooks is not wrapping it at all.</p>
+<h2 id="styled-components">Styled Components</h2>
+<h3 id="specify-a-displayname">Specify A displayName</h3>
+<p>For example:</p>
+<pre class=" language-tsx"><code class="prism  language-tsx">
+export  const  LogoWrapper = styled.div`
+
+height: ${DIMENSIONS.HEADER}px;
+
+  
+
+.img-logo {
+
+width: ${(props) =&gt; (props.companyId === 14 ? '65px' : '160px')};
+
+max-height: 55px;
+
+}
+
+`;
+
+</code></pre>
+<p>Will have a display name of styled.div in the React Devtools which is not very helpful since there may be many more semantically identical instances.</p>
+<p>However, with the following line:</p>
+<pre class=" language-tsx"><code class="prism  language-tsx">
+export  const  LogoWrapper = styled.div`
+
+height: ${DIMENSIONS.HEADER}px;
+
+  
+
+.img-logo {
+
+width: ${(props) =&gt; (props.companyId === 14 ? '65px' : '160px')};
+
+max-height: 55px;
+
+}
+
+`;
+
+LogoWrapper.displayName = 'LogoWrapper';
+
+</code></pre>
+<p>With this addition, the display name becomes <code>LogoWrapper</code>.</p>
+
+          </div>
+        </div>
+
+        <div class="disqus__wrapper">
+          <div id="disqus_thread"></div>
+        </div>
+      </main>
+    </section>
+
+    <script src="./index.js"></script>
+
+    <script>
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+      /*
+      var disqus_config = function () {
+      this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      */
+      (function () { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://mateja176-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+        Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//mateja176-blog.disqus.com/count.js" async></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137872597-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-137872597-1');
+    </script>
+  </body>
+
+</html>
+
