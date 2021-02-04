@@ -104,9 +104,7 @@
 <p>Consider the example of component <code>Foo.jsx</code>:</p>
 <pre class=" language-jsx"><code class="prism  language-jsx">
 <span class="token keyword">export</span>  <span class="token keyword">default</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-
-<span class="token comment">/* ... */</span>
-
+  <span class="token comment">/* ... */</span>
 <span class="token punctuation">}</span>
 
 </code></pre>
@@ -114,9 +112,7 @@
 <p>Whereas the following approach solves the above mentioned issue:</p>
 <pre class=" language-jsx"><code class="prism  language-jsx">
 <span class="token keyword">const</span>  <span class="token function-variable function">Foo</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-
-<span class="token comment">/* ... */</span>
-
+  <span class="token comment">/* ... */</span>
 <span class="token punctuation">}</span>
 
   
@@ -129,8 +125,7 @@
 <p>The problem has to do with clean component architecture. Extracting constants inline function and object declarations into constants aid the readability, reusability and maintainability. This is often trivial to do:</p>
 <pre class=" language-tsx"><code class="prism  language-tsx">
 const  Foo: React.FC = () =&gt; {
-
-return  &lt;div  style={{ width:  200, background:  '#eee' }}&gt;Bar&lt;/div&gt;
+  return  &lt;div  style={{ width:  200, background:  '#eee' }}&gt;Bar&lt;/div&gt;
 
 }
 
@@ -142,9 +137,7 @@ const  fooStyle: React.CSSProperties = { width:  200, background:  '#eee' };
   
 
 const  Foo = () =&gt; {
-
 return  &lt;div  style={fooStyle}&gt;Bar&lt;/div&gt;
-
 }
 
 </code></pre>
@@ -179,19 +172,12 @@ return  &lt;div  style={fooStyle}&gt;Bar&lt;/div&gt;
 <p>For example:</p>
 <pre class=" language-tsx"><code class="prism  language-tsx">
 export  const  LogoWrapper = styled.div`
-
-height: ${DIMENSIONS.HEADER}px;
-
+  height: ${DIMENSIONS.HEADER}px;
   
-
-.img-logo {
-
-width: ${(props) =&gt; (props.companyId === 14 ? '65px' : '160px')};
-
-max-height: 55px;
-
-}
-
+  .img-logo {
+    width: ${(props) =&gt; (props.companyId === 14 ? '65px' : '160px')};
+    max-height: 55px;
+  }
 `;
 
 </code></pre>
@@ -199,19 +185,12 @@ max-height: 55px;
 <p>However, with the following line:</p>
 <pre class=" language-tsx"><code class="prism  language-tsx">
 export  const  LogoWrapper = styled.div`
+  height: ${DIMENSIONS.HEADER}px;
 
-height: ${DIMENSIONS.HEADER}px;
-
-  
-
-.img-logo {
-
-width: ${(props) =&gt; (props.companyId === 14 ? '65px' : '160px')};
-
-max-height: 55px;
-
-}
-
+  .img-logo {
+    width: ${(props) =&gt; (props.companyId === 14 ? '65px' : '160px')};
+    max-height: 55px;
+  }
 `;
 
 LogoWrapper.displayName = 'LogoWrapper';
