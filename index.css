@@ -4,7 +4,8 @@
 
 img,
 picture,
-video {
+video,
+iframe {
   filter: invert(1) hue-rotate(180deg);
 }
 
@@ -41,7 +42,7 @@ main {
 
 .stackedit__toc {
   padding: 20px 0px;
-  background: #eee;
+  background: rgb(230, 230, 230);
   height: 100%;
 }
 
