@@ -4,27 +4,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>React code quality guidelines</title>
-  <base href="./react code quality guidelines.html">
+  <title>React Code Quality Guidelines</title>
+  <base href="./react-code-quality-guidelines.html">
   <link rel="stylesheet" href="https://stackedit.io/style.css" />
   <link rel="stylesheet" href="./index.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
 
-  <meta property="og:url" content="https://mateja176.github.io/blog/react code quality guidelines.html" />
+  <meta property="og:url" content="https://mateja176.github.io/blog/react-code-quality-guidelines.html" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="React code quality guidelines" />
+  <meta property="og:title" content="React Code Quality Guidelines" />
   <meta property="og:description"
-    content="Read full article at https://mateja176.github.com/blog/react code quality guidelines.html" />
+    content="Read full article at https://mateja176.github.com/blog/react-code-quality-guidelines.html" />
   <meta property="og:image" content="https://i.imgur.com/nw1YiXw.png" />
   <meta property="og:image:width" content="125" />
   <meta property="og:image:height" content="125" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="https://mateja176.github.io/blog/react code quality guidelines.html" />
-  <meta name="twitter:title" content="React code quality guidelines" />
+  <meta name="twitter:site" content="https://mateja176.github.io/blog/react-code-quality-guidelines.html" />
+  <meta name="twitter:title" content="React Code Quality Guidelines" />
   <meta name="twitter:description"
-    content="Read full article at https://mateja176.github.com/blog/react code quality guidelines.html" />
+    content="Read full article at https://mateja176.github.com/blog/react-code-quality-guidelines.html" />
   <meta name="twitter:image" content="https://i.imgur.com/nw1YiXw.png" />
 </head>
 
@@ -102,11 +102,9 @@
 <h2 id="clean-components">Clean Components</h2>
 <h3 id="do-name-your-components-explicitly">Do Name Your Components Explicitly</h3>
 <p>Consider the example of component <code>Foo.jsx</code>:</p>
-<pre class=" language-jsx"><code class="prism  language-jsx">
-<span class="token keyword">export</span>  <span class="token keyword">default</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+<pre class=" language-jsx"><code class="prism  language-jsx"><span class="token keyword">export</span>  <span class="token keyword">default</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
   <span class="token comment">/* ... */</span>
 <span class="token punctuation">}</span>
-
 </code></pre>
 <p>Has an important shortcoming when debugging the component via React DevTools and that is the fact that the component cannot be Searched by Name. To be exact searching for <code>Foo</code> is not going to focus you to the component instance based on <code>Foo.jsx</code>.</p>
 <p>Whereas the following approach solves the above mentioned issue:</p>
@@ -114,8 +112,6 @@
 <span class="token keyword">const</span>  <span class="token function-variable function">Foo</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
   <span class="token comment">/* ... */</span>
 <span class="token punctuation">}</span>
-
-  
 
 <span class="token keyword">export</span>  <span class="token keyword">default</span>  Foo<span class="token punctuation">;</span>
 
@@ -134,10 +130,8 @@ const  Foo: React.FC = () =&gt; {
 <pre class=" language-tsx"><code class="prism  language-tsx">
 const  fooStyle: React.CSSProperties = { width:  200, background:  '#eee' };
 
-  
-
 const  Foo = () =&gt; {
-return  &lt;div  style={fooStyle}&gt;Bar&lt;/div&gt;
+  return  &lt;div  style={fooStyle}&gt;Bar&lt;/div&gt;
 }
 
 </code></pre>
