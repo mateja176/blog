@@ -16,6 +16,12 @@ iframe {
 html,
 body {
   height: 100%;
+}
+
+html {
+  background-color: #111;
+}
+body {
   background-color: #eee;
 }
 
