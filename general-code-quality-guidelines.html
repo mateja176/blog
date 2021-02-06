@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>General Code Quality Guidelines</title>
+  <base href="./general-code-quality-guidelines.html">
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+  <link rel="stylesheet" href="./index.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+
+  <meta property="og:url" content="https://mateja176.github.io/blog/general-code-quality-guidelines.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="General Code Quality Guidelines" />
+  <meta property="og:description"
+    content="Read full article at https://mateja176.github.com/blog/general-code-quality-guidelines.html" />
+  <meta property="og:image" content="https://i.imgur.com/nw1YiXw.png" />
+  <meta property="og:image:width" content="125" />
+  <meta property="og:image:height" content="125" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="https://mateja176.github.io/blog/general-code-quality-guidelines.html" />
+  <meta name="twitter:title" content="General Code Quality Guidelines" />
+  <meta name="twitter:description"
+    content="Read full article at https://mateja176.github.com/blog/general-code-quality-guidelines.html" />
+  <meta name="twitter:image" content="https://i.imgur.com/nw1YiXw.png" />
+</head>
+
+  <body class="stackedit">
+    <section>
+      <div class="toc__toggle" tabindex="0">
+        <i class="material-icons">toc</i>
+      </div>
+
+      <div class="stackedit__left app-hidden">
+        <div class="stackedit__toc">
+          
+<ul>
+<li>
+<ul>
+<li><a href="#extract-constants">Extract Constants</a></li>
+<li><a href="#use-a-spell-checker">Use A Spell Checker</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+
+      <main>
+        <div class="stackedit__right">
+          <div class="stackedit__html">
+            <h2 id="extract-constants">Extract Constants</h2>
+<p>Do not hesitate to extract mappings of values like statuses into either <code>enum</code>'s or constant object (deep immutability is supported through <code>as const</code>). Even if the constants are used in a single file this:</p>
+<pre class=" language-ts"><code class="prism  language-ts">
+<span class="token keyword">export</span>  <span class="token keyword">enum</span>  AssessmentStatus <span class="token punctuation">{</span>
+  Ongoing<span class="token punctuation">,</span>
+  Completed<span class="token punctuation">,</span>
+  Archived<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+<p>Followed by this:</p>
+<pre class=" language-ts"><code class="prism  language-ts">condition<span class="token punctuation">.</span>status <span class="token operator">=</span> AssessmentStatus<span class="token punctuation">.</span>Completed<span class="token punctuation">;</span>
+</code></pre>
+<p>Is more readable and maintainable then just:</p>
+<pre class=" language-ts"><code class="prism  language-ts">condition<span class="token punctuation">.</span>status <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Comments are useful, however they become stale much more easily than code.</p>
+<h2 id="use-a-spell-checker">Use A Spell Checker</h2>
+<p>Using a spell checker is a great first line of defense against typos like <code>carear</code> instead of <code>career</code> or <code>Questionaire</code> instead of <code>Questionnaire</code></p>
+<p>Furthermore, although such typos are not intrinsically harmful, it is possible for such a typo to creep up in a network request which does have negative consequences. For example entering <code>assesssment</code> instead of <code>assessment</code>.</p>
+<p>Additionally, spell checkers usually have a mechanism of adding new words, such that using custom names like <code>knockri</code> doesn’t represent a problem.</p>
+
+          </div>
+        </div>
+
+        <div class="disqus__wrapper">
+          <div id="disqus_thread"></div>
+        </div>
+      </main>
+    </section>
+
+    <script src="./index.js"></script>
+
+    <script>
+      /*
+      (function () { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://mateja176-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+      */
+    </script>
+    <!--
+    <script id="dsq-count-scr" src="//mateja176-blog.disqus.com/count.js" async></script>
+	-->
+	
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137872597-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-137872597-1');
+    </script>
+  </body>
+
+</html>
+
