@@ -47,6 +47,7 @@
 <li><a href="#composition">Composition</a></li>
 <li><a href="#function-composition">Function Composition</a></li>
 <li><a href="#clean-components">Clean Components</a></li>
+<li><a href="#minimize-the-number-of-api-requests">Minimize the number of API requests</a></li>
 <li><a href="#hooks">Hooks</a></li>
 <li><a href="#styled-components">Styled Components</a></li>
 </ul>
@@ -149,6 +150,17 @@ const  Foo = () =&gt; {
 <p>¹ <code>globalThis</code> which is represented by the window in the context of the browser</p>
 <h3 id="consistency">Consistency</h3>
 <p>The above outlined naming convention is project based. The names themselves are not important, but consistency is.</p>
+<h2 id="minimize-the-number-of-api-requests">Minimize the number of API requests</h2>
+<p>Any time an asynchronous operation is performed, it is slower compared to a synchronous operation. Which leads to a worse user experience. Apart from that, asynchronous operations having three base states, which we are going to name:</p>
+<ul>
+<li>Loading</li>
+<li>Success</li>
+<li>Error</li>
+<li></li>
+</ul>
+<p>All of the three states need to taken in account by the user interface. <a href="https://reactjs.org/docs/concurrent-mode-patterns.html">Concurrent UI patterns</a> and fast client server communications allow for “skipping” the <code>Loading</code> UI state. Reliable network connections and retry mechanisms such as <a href="https://en.wikipedia.org/wiki/Exponential_backoff">exponential back-off</a> allow for the “skipping” of the error state. Despite the fact that the user may never see them, they still ought to exist in the background, because networks are intrinsically not a 100% reliable.</p>
+<p>The overhead of managing the three distinct states, plus managing concurrent UI patterns such as deferring and retry mechanisms have a cost associated to them.</p>
+<p>For the sake of simplicity and UX, it is preferable to maintain and synchronize a client side cache after performing a mutation of the “server state” instead of performing a new <code>GET</code> request.</p>
 <h2 id="hooks">Hooks</h2>
 <h3 id="do-prefix-custom-hooks-with-use">Do Prefix Custom Hooks With “use”</h3>
 <p>In the <a href="https://reactjs.org/docs/hooks-overview.html#building-your-own-hooks">Building Your Own Hooks</a> section of the official React docs, there is a paragraph stating the following:</p>
@@ -161,6 +173,8 @@ const  Foo = () =&gt; {
 <p>However if you follow the <a href="https://reactjs.org/docs/hooks-rules.html">Rules Of Hooks</a>. An important point is to declare all of the dependencies (apart from static ones) in the dependencies array.</p>
 <p>In the case of <code>useEffect</code> not managing dependencies well leads to obvious consequences like <code>Too many renders</code> errors etc. Leaving out a dependency though may lead to an effect running fewer times that it should (a notable exception is when we want an effect to run solely upon component mount). Luckily for us, developers, the React team the <a href="https://www.npmjs.com/package/eslint-plugin-react-hooks">eslint-plugin-react-hooks</a> which means that we don’t have to think about dependency management all the time.</p>
 <p>The point, however, is that if a custom hook has an instance of <code>useEffect</code>. And if the hook has a prop of type object as a dependency. An issue can emerge depending on how to object prop is passed to the instance of the custom hook. Namely, if the object is passed inline, a new object is created on each parent component render and the referential integrity, which dependency checking relies on, is broken. Meaning that the code in the <code>useEffect</code> callback is going to be executed as if the hooks is not wrapping it at all.</p>
+<h3 id="always-specify-a-dependency-array">Always specify a dependency array</h3>
+<p>Not specifying a dependency array (which is the second parameter of the useEffect hook) is equivalent to not wrapping your code in a useEffect in the first place.</p>
 <h2 id="styled-components">Styled Components</h2>
 <h3 id="specify-a-displayname">Specify A displayName</h3>
 <p>For example:</p>
