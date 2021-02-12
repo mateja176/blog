@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading</title>
+  <base href="./loading.html">
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+  <link rel="stylesheet" href="./index.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+
+  <meta property="og:url" content="https://mateja176.github.io/blog/loading.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Loading" />
+  <meta property="og:description"
+    content="Read full article at https://mateja176.github.com/blog/loading.html" />
+  <meta property="og:image" content="https://i.imgur.com/nw1YiXw.png" />
+  <meta property="og:image:width" content="125" />
+  <meta property="og:image:height" content="125" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="https://mateja176.github.io/blog/loading.html" />
+  <meta name="twitter:title" content="Loading" />
+  <meta name="twitter:description"
+    content="Read full article at https://mateja176.github.com/blog/loading.html" />
+  <meta name="twitter:image" content="https://i.imgur.com/nw1YiXw.png" />
+</head>
+
+  <body class="stackedit">
+    <section>
+      <div class="toc__toggle" tabindex="0">
+        <i class="material-icons">toc</i>
+      </div>
+
+      <div class="stackedit__left app-hidden">
+        <div class="stackedit__toc">
+          
+<ul>
+<li><a href="#great-ux-with-these-loading-techniques">Great UX With These Loading Techniques</a>
+<ul>
+<li><a href="#backend-operations">Backend Operations</a></li>
+<li><a href="#loading-content">Loading Content</a></li>
+<li><a href="#lazy-loading-pages">Lazy Loading Pages</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+
+      <main>
+        <div class="stackedit__right">
+          <div class="stackedit__html">
+            <h1 id="great-ux-with-these-loading-techniques">Great UX With These Loading Techniques</h1>
+<p>We will be discussing 3 types of loading a user may encounter while interacting with your application.</p>
+<p><em>This discussion is mostly oriented towards <a href="https://wikipedia.org/wiki/single-page_application">single page apps</a> but is relevant for any web app</em></p>
+<h2 id="backend-operations">Backend Operations</h2>
+<p>This is the most straightforward way of handling a loading state and along with <a href="#loading-content">loading content</a> the most common one.</p>
+<p>Let’s say that in front of you is a login form and you’ve just typed in your credentials. Now you may want to submit your credentials to authenticate yourself and access your private content. After clicking the submit button a few things can happen.</p>
+<ol>
+<li>The server request performs flawlessly and you get a desired response</li>
+<li>The request either errors or times out</li>
+</ol>
+<p>Either way, a certain amount of time passes by during which we are unsure of the outcome of the operation.</p>
+<p>First we ought to communicate to the user that the operation has started and update the user as much as possible about the progress of the operation. For their own benefit, you may also want to disallow the user to initiate any new operation of the same kind until the first one has completed.</p>
+<p>An easy way to accomplish that objective is to disabled the submit button and/or set the buttons children and cursor to loading, until one of the beforementioned outcomes meet the users request.</p>
+<h2 id="loading-content">Loading Content</h2>
+<p>The modern trend of handling content loading is to display a discretely shimmer shape ( usually a rectangle or a circle ), which resembles the shape of the content which shall be loaded form the server.</p>
+<p>This is good for a number of reasons. Firstly, it sets the users expextations for what to expect after the loading has finished ( it is much more descriptive than a simple loading spinner ). Secondly, the loaded content doesn’t appear out of the blue, but instead gently emerges from the shimmering shapes.</p>
+<p>Now the question is how to create those shimmering shapes for the content you need to load. Considering the countless shapes data can have an all of the different arrangements finding an easy way to generate loading shapes seems like a difficult task.</p>
+<p>The obvious way to do it would be to create the loading shapes ad hoc.</p>
+<p>Since you’re a developer you probably have it in you to contantly try to improve things and find easier way of accomplish monotonous tasks and this seems like the right opportunity to put your creativity and smarts to use.</p>
+<p>Following is one simple <code>one size fits all</code> higher order component which you may use to display appropriately sized <strong>loading shapes</strong> regardless of the shape of the content. This technique isn’t perfect however since the <code>HOC</code> requires you to have a know what a tipical instance of your content is going to be. For example a typical female name might be <code>Jane</code>.</p>
+<pre class=" language-ts"><code class="prism  language-ts"><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">{</span> FC <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span>
+<span class="token keyword">import</span> ContentLoader <span class="token keyword">from</span> <span class="token string">'react-content-loader'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">LoaderProps</span> <span class="token punctuation">{</span>
+  isLoadig<span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> Loader<span class="token punctuation">:</span>  <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> isLoading<span class="token punctuation">,</span> children <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>
+  isLoading 
+    <span class="token operator">?</span> <span class="token operator">&lt;</span>div
+        style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>
+          display<span class="token punctuation">:</span> <span class="token string">'inline-block'</span><span class="token punctuation">,</span>
+          position<span class="token punctuation">:</span> <span class="token string">'relative'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&gt;</span>
+          <span class="token punctuation">{</span>children<span class="token punctuation">}</span>
+          <span class="token operator">&lt;</span>ContentLoader
+            style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>
+              position<span class="token punctuation">:</span> <span class="token string">'absolute'</span><span class="token punctuation">,</span>
+              width<span class="token punctuation">:</span> <span class="token string">'100%'</span><span class="token punctuation">,</span>
+              height<span class="token punctuation">:</span> <span class="token string">'100%'</span><span class="token punctuation">,</span>
+              top<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+              left<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">}</span>
+          <span class="token operator">/</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">:</span> <span class="token operator">&lt;</span><span class="token operator">&gt;</span><span class="token punctuation">{</span>children<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span> 
+</code></pre>
+<p>If you’re looking to get started with your own react application a recommended batteries included seed project is <a href="https://github.com/mateja176/react-hot-starter">react hot starter</a></p>
+<h2 id="lazy-loading-pages">Lazy Loading Pages</h2>
+<p>The third type is least common of the 3, but important nevertheless. At a certain point, when one of your pages grows significantly, or when a certain page is using a large third party dependency, you might want to lazy load that page to decrease time to <a href="https://developers.google.com/web/tools/lighthouse/audits/first-meaningful-paint">first meaningful paint</a> and <a href="https://developers.google.com/web/tools/lighthouse/audits/time-to-interactive">time to interactive</a>.</p>
+<p>Since the <strong>page loading skeleton</strong> will be included in your base bundle and the page itself will be loaded lazily - the page loading skeleton will be a completely separate entity.</p>
+<p>Usually you would create a handcrafted version of a page but will all major content containers replaced with <strong>shimmering boxes</strong>. This would require you to meticulously replicate the layout of the original page and any change that you make to the original page shall require adjustments of the <strong>page loading skeleton</strong>. This is a painstaking process, but the good news is - there is an easier way.</p>
+<p>You can separate the flash from the bone by extracting layout components into a <strong>page skeleton</strong> component which does not care too much about the gems you insert into its slots since it only knows how to position those elements. The you would use the <strong>page skeleton</strong> as the basis for creating the page component itself as well as the <strong>page loading skeleton</strong> keeping the layout in sync between the two.</p>
+
+          </div>
+        </div>
+
+        <div class="disqus__wrapper">
+          <div id="disqus_thread"></div>
+        </div>
+      </main>
+    </section>
+
+    <script src="./index.js"></script>
+
+    <script>
+      /*
+      (function () { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://mateja176-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+      */
+    </script>
+    <!--
+    <script id="dsq-count-scr" src="//mateja176-blog.disqus.com/count.js" async></script>
+	-->
+	
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137872597-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-137872597-1');
+    </script>
+  </body>
+
+</html>
+
