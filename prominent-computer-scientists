@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prominent Computer Scientists</title>
+  <base href="./prominent-computer-scientists.html">
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+  <link rel="stylesheet" href="./index.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+
+  <meta property="og:url" content="https://mateja176.github.io/blog/prominent-computer-scientists.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Prominent Computer Scientists" />
+  <meta property="og:description"
+    content="Read full article at https://mateja176.github.com/blog/prominent-computer-scientists.html" />
+  <meta property="og:image" content="https://i.imgur.com/nw1YiXw.png" />
+  <meta property="og:image:width" content="125" />
+  <meta property="og:image:height" content="125" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="https://mateja176.github.io/blog/prominent-computer-scientists.html" />
+  <meta name="twitter:title" content="Prominent Computer Scientists" />
+  <meta name="twitter:description"
+    content="Read full article at https://mateja176.github.com/blog/prominent-computer-scientists.html" />
+  <meta name="twitter:image" content="https://i.imgur.com/nw1YiXw.png" />
+</head>
+
+  <body class="stackedit">
+    <section>
+      <div class="toc__toggle" tabindex="0">
+        <i class="material-icons">toc</i>
+      </div>
+
+      <div class="stackedit__left app-hidden">
+        <div class="stackedit__toc">
+          
+<ul>
+<li><a href="#prominent-computer-scientists-of-our-era">Prominent Computer Scientists Of Our Era</a></li>
+</ul>
+
+        </div>
+      </div>
+
+      <main>
+        <div class="stackedit__right">
+          <div class="stackedit__html">
+            <h1 id="prominent-computer-scientists-of-our-era">Prominent Computer Scientists Of Our Era</h1>
+<p><a href="https://en.wikipedia.org/wiki/Jeff_Sutherland">Jeff Sutherland</a><br>
+<a href="https://en.wikipedia.org/wiki/Thorsten_Altenkirch">Thorsten Altenkirch</a><br>
+<a href="https://en.wikipedia.org/wiki/Erik_Meijer_(computer_scientist)">Erik Meijer</a><br>
+<a href="https://en.wikipedia.org/wiki/Jim_Coplien">Jim Coplien</a><br>
+<a href="https://en.wikipedia.org/wiki/Martin_Fowler_(software_engineer)">Martin Fowler</a><br>
+<a href="https://twitter.com/evancz">Evan Czaplicki</a><br>
+<a href="https://twitter.com/rtfeldman">Richard Feldman</a><br>
+<a href="https://twitter.com/BartoszMilewski">Bartosz Milewszki</a><br>
+<a href="https://en.wikipedia.org/wiki/Simon_Peyton_Jones">Simon Peyton Jones</a><br>
+<a href="https://en.wikipedia.org/wiki/Philip_Wadler">Philip Wadler</a><br>
+<a href="https://en.wikipedia.org/wiki/Rich_Hickey">Rich Hickey</a></p>
+
+          </div>
+        </div>
+
+        <div class="disqus__wrapper">
+          <div id="disqus_thread"></div>
+        </div>
+      </main>
+    </section>
+
+    <script src="./index.js"></script>
+
+    <script>
+      /*
+      (function () { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://mateja176-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+      */
+    </script>
+    <!--
+    <script id="dsq-count-scr" src="//mateja176-blog.disqus.com/count.js" async></script>
+	-->
+	
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137872597-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-137872597-1');
+    </script>
+  </body>
+
+</html>
+
